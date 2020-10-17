@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -6,9 +6,13 @@ import datetime
 
 app = Flask(__name__)
 
+@app.route("/",methods=["GET"])
+def index():
+    return render_template("index.html")
+
 @app.route("/twi", methods=["POST"])
 def recive():
-    # データの取得
+    # データの取得/
     kari=request.get_json(force=True)
     body = kari['Body']
     fromNum = kari['From']

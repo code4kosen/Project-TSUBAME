@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +14,11 @@ class _SendInfoState extends State<SendInfo> {
 
   String _name;
   String _body;
-  var app;
 
   FocusNode nameNode, _bodyFocus;
 
   @override
   void initState() {
-    app = Firebase.initializeApp();
     super.initState();
     _bodyFocus = FocusNode();
   }
@@ -81,7 +78,7 @@ class _SendInfoState extends State<SendInfo> {
     db.collection('news')
         .add({'Name': _name, 'Body': _body, 'Date': DateTime.now().toUtc()})
         .then((value) => print("news Added"))
-        .catchError((error) => print("Failed to add news: %error"));
+        .catchError((error) => print("Failed to add news: $error"));
   }
 
   void dispose() {

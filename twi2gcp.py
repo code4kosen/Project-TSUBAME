@@ -3,6 +3,9 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 import datetime
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -15,6 +18,7 @@ def recive():
     # データの取得/
     kari=request.get_json(force=True)
     body = kari['Body']
+    date=datetime.datetime.now()
     fromNum = kari['From']
 
     # GCF初期化
@@ -27,10 +31,18 @@ def recive():
     # GCFにデータを追加
     data = {
         u'Body': body,
-        u'Date': datetime.datetime.now(),
+        u'Date': date,
         u'Name': fromNum
+        
     }
     db.collection(u'news').add(data)
+
+
+    logging.info(
+        'received Body=%s\n, Date=%s\n Name=%s',
+        body,date,fromNum
+        )
+
     return request.get_data()
 
 

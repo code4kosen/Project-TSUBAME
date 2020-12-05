@@ -12,4 +12,4 @@ users_ref = db.collection(u'news')
 docs = users_ref.stream()
 
 for doc in docs:
-    print(u'{} => {}'.format(doc.id, doc.to_dict()))
+    print(format(doc.to_dict()))

@@ -13,3 +13,4 @@ docs = users_ref.stream()
 
 for doc in docs:
     print(format(doc.to_dict()["Body"]))
+    print(format(doc.to_dict()["Date"]))

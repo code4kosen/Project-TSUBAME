@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_tsubame/sendInfo.dart';
+import 'package:project_tsubame/widgets/sendInfo.dart';
 
 class HomePage extends StatefulWidget {
   @override

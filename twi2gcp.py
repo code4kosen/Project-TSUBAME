@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request, render_template
 import firebase_admin
 from firebase_admin import firestore
@@ -7,15 +9,15 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='./build/web')
 
 @app.route("/",methods=["GET"])
 def index():
-    return render_template("index.html")
+    return app.send_static_file("index.html")
 
 @app.route("/twi", methods=["POST"])
 def recive():
-    # データの取得/
+    #データの取得/
     kari=request.get_json(force=True)
     body = kari['Body']
     date=datetime.datetime.now()
@@ -33,7 +35,6 @@ def recive():
         u'Body': body,
         u'Date': date,
         u'Name': fromNum
-        
     }
     db.collection(u'news').add(data)
 

@@ -1,0 +1,7 @@
+runtime: python38
+inbound_services:
+- mail
+- url: /_ah/mail/.+
+  script: receive_email.app
+  login: admin
+entrypoint: gunicorn -b :$PORT twi2gcp:app
